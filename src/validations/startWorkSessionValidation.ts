@@ -8,4 +8,10 @@ export default checkSchema({
     },
     isNumeric: true,
   },
+  date: {
+    in: ["body"],
+    notEmpty: {
+      errorMessage: "date is required",
+    },
+  },
 });

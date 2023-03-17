@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import { auth } from "./middlewares/auth.js";
+import insightRoutes from "./Routes/insightRoutes.js";
 import userRoutes from "./Routes/userRoutes.js";
 import workRoutes from "./Routes/workRoutes.js";
 import { errorResponse } from "./utils/error.js";
@@ -16,6 +17,7 @@ app.use("/user", userRoutes);
 
 app.use(auth);
 app.use("/work", workRoutes);
+app.use("/insight", insightRoutes);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   if (err.errorCode) {

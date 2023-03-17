@@ -7,4 +7,10 @@ export default checkSchema({
       errorMessage: "Start time is required",
     },
   },
+  date: {
+    in: ["body"],
+    notEmpty: {
+      errorMessage: "date is required",
+    },
+  },
 });

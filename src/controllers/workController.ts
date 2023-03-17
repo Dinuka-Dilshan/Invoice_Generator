@@ -4,14 +4,12 @@ import User from "../models/User.js";
 import { errorResponse } from "../utils/error.js";
 
 export const startDayWork = async (
-  req: Request<{}, {}, { startTime: Date }>,
+  req: Request<{}, {}, { startTime: Date; date: string }>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const today = Intl.DateTimeFormat("si-LK", {
-      timeZone: "Asia/Colombo",
-    }).format(new Date());
+    const today = req.body.date;
 
     const result = await User.findOneAndUpdate(
       { email: req.user?.email, "workRecords.date": { $ne: today } },
@@ -40,14 +38,12 @@ export const startDayWork = async (
 };
 
 export const completeOngoingWorkSession = async (
-  req: Request<{}, {}, { endTime: Date }>,
+  req: Request<{}, {}, { endTime: Date; date: string }>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const today = Intl.DateTimeFormat("si-LK", {
-      timeZone: "Asia/Colombo",
-    }).format(new Date());
+    const today = req.body.date;
 
     const result = await User.findOneAndUpdate(
       {
@@ -74,14 +70,12 @@ export const completeOngoingWorkSession = async (
 };
 
 export const startWorkSession = async (
-  req: Request<{}, {}, { startTime: Date }>,
+  req: Request<{}, {}, { startTime: Date; date: string }>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const today = Intl.DateTimeFormat("si-LK", {
-      timeZone: "Asia/Colombo",
-    }).format(new Date());
+    const today = req.body.date;
     const result = await User.findOneAndUpdate(
       {
         email: req.user?.email,
